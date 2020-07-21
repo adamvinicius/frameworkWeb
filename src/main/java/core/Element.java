@@ -13,8 +13,9 @@ public class Element {
 	private ByValue by;
 	private String map;
 	private WebElement webElement = null;
+	private WebElement element = null;
 	private HashMap<ByValue, By> byMap = new HashMap<>();
-		
+	
 	public Element(ByValue by, String _map) {
 		this.by = by;
 		map = _map;
@@ -35,7 +36,10 @@ public class Element {
 	}
 	
 	public WebElement getElement() {
-		return get(byMap.get(by));
+		if (element == null) {
+			element = get(byMap.get(by));
+		}
+		return element;
 	}
 	
 	public WebElement get(By by) {
@@ -43,7 +47,6 @@ public class Element {
 			return Driver.getDriver().findElement(by);
 		}
 		return webElement.findElement(by);
-		
 	}
 			
 	public List<WebElement> getElements() {
@@ -85,5 +88,17 @@ public class Element {
 	public void select(String value) {
 		Select select = new Select(getElement());
 		select.selectByVisibleText(value);
+	}
+	
+	public void waitVisibleElement() {
+		element = Driver.waitVisibleElement(byMap.get(by));
+	}
+	
+	public void waitInvisibilityElement() {
+		Driver.waitInvisibilityElemnt(byMap.get(by));
+	}
+	
+	public void waitClickableElement() {
+		element = Driver.waitClickableElement(byMap.get(by));
 	}
 }
