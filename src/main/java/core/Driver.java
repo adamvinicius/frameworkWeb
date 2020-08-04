@@ -21,9 +21,12 @@ public class Driver {
 		ChromeOptions options = new ChromeOptions();
 		options.setHeadless(false);
 		
+
+		
 		driver = new ChromeDriver(options);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		driver.manage().window().maximize();
+		
 	}
 	
 	public static void fechaNavegador() {
