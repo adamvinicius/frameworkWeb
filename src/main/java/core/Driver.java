@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,7 +18,10 @@ public class Driver {
 	
 	public static void abreNavegador() {
 		System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.setHeadless(false);
+		
+		driver = new ChromeDriver(options);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		driver.manage().window().maximize();
 	}

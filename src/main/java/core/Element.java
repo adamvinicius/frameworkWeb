@@ -91,6 +91,21 @@ public class Element {
 		select.selectByVisibleText(value);
 	}
 	
+	public void selectLista(String value) throws Exception {
+		List<WebElement> listElement = getElements();
+		boolean encontrou = false;
+		for (WebElement webElement : listElement) {
+			if (value.equals(webElement.getText().trim())) {
+				webElement.click();
+				encontrou = true;
+				break;
+			}
+		}
+		if (!encontrou) {
+			throw new Exception("Valor "+value+" nao existe na lista, selector:"+map);
+		}
+	}
+	
 	public Element waitVisibleElement() {
 		element = Driver.waitVisibleElement(byMap.get(by));
 		return this;
